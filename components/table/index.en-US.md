@@ -60,6 +60,7 @@ const columns = [{
 | defaultExpandedRowKeys | Initial expanded row keys | string\[] | - |
 | expandedRowKeys | Current expanded row keys | string\[] | - |
 | expandedRowRender | Expanded container render for each row | Function(record):ReactNode | - |
+| expandRowByClick | Whether to expand row by clicking anywhere in the whole row | boolean | `false` |
 | footer | Table footer renderer | Function(currentPageData) |  |
 | indentSize | Indent size in pixels of tree data | number | 15 |
 | loading | Loading status of table | boolean\|[object](https://ant.design/components/spin-cn/#API) ([more](https://github.com/ant-design/ant-design/issues/4544#issuecomment-271533135)) | `false` |
@@ -142,14 +143,14 @@ Properties for row selection.
 
 ```jsx
 import { Table } from 'antd';
-import { TableColumnConfig } from 'antd/lib/table/Table';
+import { ColumnProps } from 'antd/lib/table';
 
 interface IUser {
   key: number,
   name: string;
 }
 
-const columns: TableColumnConfig<IUser>[] = [{
+const columns: ColumnProps<IUser>[] = [{
   key: 'name',
   title: 'Name',
   dataIndex: 'name',

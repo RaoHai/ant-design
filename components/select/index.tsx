@@ -17,6 +17,7 @@ export interface AbstractSelectProps {
   disabled?: boolean;
   style?: React.CSSProperties;
   placeholder?: string;
+  defaultActiveFirstOption?: boolean;
   dropdownClassName?: string;
   dropdownStyle?: React.CSSProperties;
   dropdownMenuStyle?: React.CSSProperties;
@@ -43,7 +44,6 @@ export interface SelectProps extends AbstractSelectProps {
   onFocus?: () => any;
   dropdownMatchSelectWidth?: boolean;
   optionFilterProp?: string;
-  defaultActiveFirstOption?: boolean;
   labelInValue?: boolean;
   getPopupContainer?: (triggerNode: Element) => HTMLElement;
   tokenSeparators?: string[];
@@ -134,8 +134,9 @@ export default class Select extends React.Component<SelectProps, {}> {
       combobox: isCombobox,
     };
 
+    // AutoComplete don't have notFoundContent defaultly
     const notFoundContentLocale = isCombobox ?
-      null : notFoundContent || locale.notFoundContent;
+      (notFoundContent || '') : (notFoundContent || locale.notFoundContent);
     return (
       <RcSelect
         {...restProps}
