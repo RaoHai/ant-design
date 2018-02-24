@@ -1,6 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { SpinProps } from '../spin';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
 
@@ -14,7 +15,7 @@ export { ListItemProps, ListItemMetaProps } from './Item';
 
 export type ColumnCount = 1 | 2 | 3 | 4 | 6 | 8 | 12 | 24;
 
-export type ColumnType = 'gutter' | 'column' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type ColumnType = 'gutter' | 'column' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 
 export interface ListGridType {
   gutter?: number;
@@ -24,6 +25,7 @@ export interface ListGridType {
   md?: ColumnCount;
   lg?: ColumnCount;
   xl?: ColumnCount;
+  xxl?: ColumnCount;
 }
 
 export type ListSize = 'small' | 'default' | 'large';
@@ -37,7 +39,7 @@ export interface ListProps {
   grid?: ListGridType;
   id?: string;
   itemLayout?: string;
-  loading?: boolean;
+  loading?: boolean | SpinProps;
   loadMore?: React.ReactNode;
   pagination?: any;
   prefixCls?: string;
@@ -115,7 +117,6 @@ export default class List extends React.Component<ListProps> {
       split,
       className,
       children,
-      loading,
       itemLayout,
       loadMore,
       pagination,
@@ -127,8 +128,17 @@ export default class List extends React.Component<ListProps> {
       renderItem,
       header,
       footer,
+      loading,
       ...rest,
     } = this.props;
+
+    let loadingProp = loading;
+    if (typeof loadingProp === 'boolean') {
+      loadingProp = {
+        spinning: loadingProp,
+      };
+    }
+    const isLoading = (loadingProp && loadingProp.spinning);
 
     // large => lg
     // small => sm
@@ -148,7 +158,7 @@ export default class List extends React.Component<ListProps> {
       [`${prefixCls}-${sizeCls}`]: sizeCls,
       [`${prefixCls}-split`]: split,
       [`${prefixCls}-bordered`]: bordered,
-      [`${prefixCls}-loading`]: loading,
+      [`${prefixCls}-loading`]: isLoading,
       [`${prefixCls}-grid`]: grid,
       [`${prefixCls}-something-after-last-item`]: this.isSomethingAfterLastTtem(),
     });
@@ -160,6 +170,7 @@ export default class List extends React.Component<ListProps> {
     );
 
     let childrenContent;
+    childrenContent = isLoading && (<div style={{ minHeight: 53 }} />);
     if (dataSource.length > 0) {
       const items = dataSource.map((item: any, index: number) => this.renderItem(item, index));
       const childrenList = React.Children.map(items, (child: any, index) => React.cloneElement(child, {
@@ -170,7 +181,7 @@ export default class List extends React.Component<ListProps> {
       childrenContent = grid ? (
         <Row gutter={grid.gutter}>{childrenList}</Row>
       ) : childrenList;
-    } else if (!children) {
+    } else if (!children && !isLoading) {
       childrenContent = (
         <LocaleReceiver
           componentName="Table"
@@ -183,7 +194,7 @@ export default class List extends React.Component<ListProps> {
 
     const content = (
       <div>
-        <Spin spinning={loading}>{childrenContent}</Spin>
+        <Spin {...loadingProp}>{childrenContent}</Spin>
         {loadMore}
         {(!loadMore && pagination) ? paginationContent : null}
       </div>

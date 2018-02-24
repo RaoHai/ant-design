@@ -77,8 +77,30 @@ const columns = [{
 | onChange | 分页、排序、筛选变化时触发 | Function(pagination, filters, sorter) |  |
 | onExpand | 点击展开图标时触发 | Function(expanded, record) |  |
 | onExpandedRowsChange | 展开的行变化时触发 | Function(expandedRows) |  |
-| onHeaderRow | 设置头部列属性 | Function(column, index) | - |
-| onRow | 设置列属性 | Function(record, index) | - |
+| onHeaderRow | 设置头部行属性 | Function(column, index) | - |
+| onRow | 设置行属性 | Function(record, index) | - |
+
+
+#### onRow 用法
+
+适用于 `onRow` `onHeaderRow` `onCell` `onHeaderCell`。
+
+```jsx
+<Table
+  onRow={(record) => {
+    return {
+      onClick: () => {},       // 点击行
+      onMouseEnter: () => {},  // 鼠标移入行
+      onXxxx...
+    };
+  )}
+  onHeaderRow={(column) => {
+    return {
+      onClick: () => {},        // 点击表头行
+    };
+  )}
+/>
+```
 
 ### Column
 
@@ -120,8 +142,8 @@ const columns = [{
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| getCheckboxProps | 选择框的默认属性配置 | Function(record) | - |
 | fixed | 把选择框列固定在左边 | boolean | - |
+| getCheckboxProps | 选择框的默认属性配置 | Function(record) | - |
 | hideDefaultSelections | 去掉『全选』『反选』两个默认选项 | boolean | false |
 | selectedRowKeys | 指定选中项的 key 数组，需要和 onChange 进行配合 | string\[] | \[] |
 | selections | 自定义选择项 [配置项](#selection), 设为 `true` 时使用默认选择项 | object\[]\|boolean | true |
