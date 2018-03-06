@@ -22,6 +22,9 @@ class App extends React.Component {
   state = {
     initValue: toContentState('@afc163'),
   }
+  componentDidMount() {
+    window.focus = this.editor;
+  }
   handleReset = (e) => {
     e.preventDefault();
     this.props.form.resetFields();
@@ -64,6 +67,7 @@ class App extends React.Component {
             initialValue: this.state.initValue,
           })(
             <Mention
+              ref={ele => this.editor = ele}
               suggestions={['afc163', 'benjycui', 'yiminghe', 'RaoHai', '中文', 'にほんご']}
             />
           )}
