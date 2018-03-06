@@ -15,6 +15,30 @@ timeline: true
 
 ---
 
+## 3.2.3
+
+`2018-03-02`
+
+- 🐞 修复组件 `Select` 中的 `onPopupScroll` 属性的 ts 定义。 [#9475](https://github.com/ant-design/ant-design/pull/9475) [@twobin](https://github.com/twobin)
+- 🐞 修复 `Table` 过滤条件下拉选择框的问题。 [#9209](https://github.com/ant-design/ant-design/issues/9209)
+- 🐞 修复 `Timeline` 自定义头部样式在 Chrome 下的显示问题。 [#9429](https://github.com/ant-design/ant-design/pull/9429) [@vthinkxie](https://github.com/vthinkxie)
+- 🐞 修复 `Select` 下拉窗口的边框显示问题。 [82092c1](https://github.com/ant-design/ant-design/commit/82092c154ac1fa7ff2f89e1adbdf0aaf22e3ff53)
+- 🐞 修复对 less 3 的兼容性问题。 [#7850](https://github.com/ant-design/ant-design/issues/7850)
+- 🐞 修复 `DatePicker.WeekPicker` 年份问题。 [#9463](https://github.com/ant-design/ant-design/issues/9463)
+- 🐞 修复 `Button.Group` 在 Chrome 下的定位对齐问题。 [#9457](https://github.com/ant-design/ant-design/issues/9457)
+
+## 3.2.2
+
+`2018-02-24`
+
+- 🌟 添加 `Pagination` 字体变量。 [#9351](https://github.com/ant-design/ant-design/issues/9351)
+- 🌟 添加 `Badge` 字重变量。 [#9352](https://github.com/ant-design/ant-design/issues/9352)
+- 🐞 修复 `Table` 当自定义 `loading.indicator` 时，不显示emptyText。 [#9355](https://github.com/ant-design/ant-design/issues/9355)
+- 🐞 修复 `Form.create` 。 [#9331](https://github.com/ant-design/ant-design/issues/9331)
+- 🐞 回滚 `Table` 中 `column.dataIndex` 的 TypeScript 定义。 [#9393](https://github.com/ant-design/ant-design/issues/9393)
+- 🐞 修复 `Layout` 中 sider 高度不足时，最后一个菜单无法显示。 [#9398](https://github.com/ant-design/ant-design/issues/9398) [@MJ111](https://github.com/MJ111)
+- 🐞 修复 `Badge` dot 模式问题。 [#9359](https://github.com/ant-design/ant-design/issues/9359) [@khayalan-mathew](https://github.com/khayalan-mathew)
+
 ## 3.2.1
 
 `2018-02-11`
